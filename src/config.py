@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import os
 from pathlib import Path
@@ -39,7 +39,7 @@ TEST_SIZE = float(os.getenv("TEST_SIZE", "0.2"))
 
 TRAIN_PATH = PROCESSED_DIR / "train.csv"
 TEST_PATH = PROCESSED_DIR / "test.csv"
-REFERENCE_PATH = REFERENCE_DIR / "reference.csv"
+REFERENCE_PATH = REFERENCE_DIR / "reference_data.csv"
 METRICS_PATH = PROCESSED_DIR / "model_metrics.json"
 BEST_RUN_PATH = PROCESSED_DIR / "best_run.json"
 PREDICTION_LOG_PATH = PREDICTIONS_DIR / "prediction_logs.csv"

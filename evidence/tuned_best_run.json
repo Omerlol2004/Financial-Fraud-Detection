@@ -1,0 +1,21 @@
+{
+  "run_id": "6b5de31bc8284764bf2d6aa886b335b3",
+  "model_name": "tuned_xgboost",
+  "metrics": {
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1": 0.6666666666666666,
+    "roc_auc": 0.75,
+    "pr_auc": 0.75,
+    "false_positives": 0,
+    "false_negatives": 1
+  },
+  "params": {
+    "n_estimators": 143,
+    "max_depth": 3,
+    "learning_rate": 0.02506252795960412,
+    "subsample": 0.8038375190335125,
+    "colsample_bytree": 0.9807967765925594,
+    "min_child_weight": 2
+  }
+}

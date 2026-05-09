@@ -1,0 +1,82 @@
+{
+  "raw": {
+    "path": "/opt/airflow/data/raw/paysim.csv",
+    "exists": true,
+    "rows": 200000,
+    "columns": [
+      "step",
+      "type",
+      "amount",
+      "oldbalanceOrg",
+      "newbalanceOrig",
+      "oldbalanceDest",
+      "newbalanceDest",
+      "isFraud"
+    ],
+    "class_distribution": {
+      "0": 199742,
+      "1": 258
+    },
+    "fraud_percentage": 0.129
+  },
+  "train": {
+    "path": "/opt/airflow/data/processed/train.csv",
+    "exists": true,
+    "rows": 160000,
+    "columns": [
+      "step",
+      "type",
+      "amount",
+      "oldbalanceOrg",
+      "newbalanceOrig",
+      "oldbalanceDest",
+      "newbalanceDest",
+      "isFraud"
+    ],
+    "class_distribution": {
+      "0": 159794,
+      "1": 206
+    },
+    "fraud_percentage": 0.12875
+  },
+  "test": {
+    "path": "/opt/airflow/data/processed/test.csv",
+    "exists": true,
+    "rows": 40000,
+    "columns": [
+      "step",
+      "type",
+      "amount",
+      "oldbalanceOrg",
+      "newbalanceOrig",
+      "oldbalanceDest",
+      "newbalanceDest",
+      "isFraud"
+    ],
+    "class_distribution": {
+      "0": 39948,
+      "1": 52
+    },
+    "fraud_percentage": 0.13
+  },
+  "reference": {
+    "path": "/opt/airflow/data/reference/reference_data.csv",
+    "exists": true,
+    "rows": 160000,
+    "columns": [
+      "step",
+      "type",
+      "amount",
+      "oldbalanceOrg",
+      "newbalanceOrig",
+      "oldbalanceDest",
+      "newbalanceDest",
+      "isFraud"
+    ],
+    "class_distribution": {
+      "0": 159794,
+      "1": 206
+    },
+    "fraud_percentage": 0.12875
+  }
+}

@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 from pathlib import Path
@@ -141,7 +141,22 @@ def train_named_model(model_name: str, model: Any) -> dict[str, Any]:
         log_artifacts(y_test, predictions, FEATURE_COLUMNS, model_name)
         signature = infer_signature(x_test.head(5), pipeline.predict_proba(x_test.head(5)))
         mlflow.sklearn.log_model(pipeline, artifact_path="model", signature=signature, input_example=x_test.head(2))
-        return {"run_id": run.info.run_id, "model_name": model_name, "metrics": metrics}
+        result = {"run_id": run.info.run_id, "model_name": model_name, "metrics": metrics}
+        record_model_result(result)
+        return result
+
+
+def record_model_result(result: dict[str, Any]) -> dict[str, Any]:
+    ensure_directories()
+    results = []
+    if METRICS_PATH.exists():
+        results = json.loads(METRICS_PATH.read_text(encoding="utf-8"))
+    if not any(existing["run_id"] == result["run_id"] for existing in results):
+        results.append(result)
+    best = max(results, key=lambda item: (item["metrics"]["pr_auc"], item["metrics"]["recall"], item["metrics"]["f1"]))
+    METRICS_PATH.write_text(json.dumps(results, indent=2), encoding="utf-8")
+    BEST_RUN_PATH.write_text(json.dumps(best, indent=2), encoding="utf-8")
+    return best
 
 
 def train_baseline_model() -> dict[str, Any]:

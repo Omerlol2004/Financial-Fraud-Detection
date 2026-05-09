@@ -1,0 +1,31 @@
+{
+  "model_name": "FraudDetectionModel",
+  "latest_versions": [
+    {
+      "version": "7",
+      "stage": "Archived",
+      "status": "READY",
+      "run_id": "c82c4e5efefe4315bb40919216d4f198"
+    },
+    {
+      "version": "2",
+      "stage": "Staging",
+      "status": "READY",
+      "run_id": "fb15854d6c204b678fd0625d33bf26c9"
+    },
+    {
+      "version": "8",
+      "stage": "Production",
+      "status": "READY",
+      "run_id": "b2343a1440c2441994fcc9c06541128a"
+    }
+  ],
+  "production_versions": [
+    {
+      "version": "8",
+      "stage": "Production",
+      "status": "READY",
+      "run_id": "b2343a1440c2441994fcc9c06541128a"
+    }
+  ]
+}

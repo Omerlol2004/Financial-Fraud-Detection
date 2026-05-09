@@ -1,0 +1,14 @@
+﻿<html><head><meta charset='utf-8'><style>body{font-family:Consolas,monospace;padding:24px;background:#fafafa}pre{white-space:pre-wrap;background:#fff;border:1px solid #ddd;padding:16px}</style></head><body><h1>airflow_task_states.txt</h1><pre>dag_id                         | execution_date            | task_id                    | state   | start_date                       | end_date                        
+===============================+===========================+============================+=========+==================================+=================================
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | validate_data              | success | 2026-05-08T20:18:03.947592+00:00 | 2026-05-08T20:18:04.281423+00:00
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | preprocess_data            | success | 2026-05-08T20:18:09.512251+00:00 | 2026-05-08T20:18:09.863934+00:00
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | train_random_forest        | success | 2026-05-08T20:18:17.737531+00:00 | 2026-05-08T20:18:31.313967+00:00
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | train_baseline_model       | success | 2026-05-08T20:18:18.089279+00:00 | 2026-05-08T20:18:31.699945+00:00
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | train_xgboost_or_lightgbm  | success | 2026-05-08T20:18:17.699367+00:00 | 2026-05-08T20:18:40.000828+00:00
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | evaluate_best_model        | success | 2026-05-08T20:20:06.165881+00:00 | 2026-05-08T20:20:06.386749+00:00
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | tune_best_model            | success | 2026-05-08T20:18:45.829150+00:00 | 2026-05-08T20:20:01.091302+00:00
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | register_best_model        | success | 2026-05-08T20:20:12.359557+00:00 | 2026-05-08T20:20:12.754092+00:00
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | promote_model              | success | 2026-05-08T20:20:17.780173+00:00 | 2026-05-08T20:20:18.094683+00:00
+fraud_detection_mlops_pipeline | 2026-05-08T20:17:57+00:00 | generate_monitoring_report | success | 2026-05-08T20:20:22.930311+00:00 | 2026-05-08T20:20:24.355348+00:00
+                                                                                                                                                                       
+</pre></body></html>

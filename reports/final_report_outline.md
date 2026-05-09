@@ -1,59 +1,56 @@
 # Final Report Outline
 
-## 1. Executive Summary
-- Problem: detect fraudulent financial transactions in an imbalanced dataset.
-- Solution: local MLOps platform with automated training, registry, serving, and monitoring.
+Use `FINAL_REPORT.md` and `evidence/FINAL_EVIDENCE_REPORT.md` as the source of truth.
 
-## 2. Dataset
-- PaySim financial fraud dataset.
-- Target: `isFraud`.
-- Key fields: transaction step, type, amount, origin/destination balances.
+## 1. Introduction
 
-## 3. Architecture
-- Airflow orchestrates pipeline tasks.
-- MLflow tracks experiments and manages model registry lifecycle.
+- End-to-end local MLOps platform for financial fraud detection.
+- Goal is to demonstrate the full lifecycle, not only model training.
+
+## 2. Problem Statement
+
+- Binary classification: fraud vs. non-fraud.
+- Highly imbalanced problem, so accuracy is not the main metric.
+- Main metrics: PR-AUC, recall, F1, false positives, false negatives.
+
+## 3. Dataset Description
+
+- PaySim transaction schema.
+- Full source mirror: 6,362,620 rows.
+- Final local run: 200,000-row stratified sample.
+- Fraud rate in sample: 0.129%.
+
+## 4. System Architecture
+
+- Airflow orchestrates the workflow.
+- MLflow tracks experiments and manages registry lifecycle.
 - FastAPI serves the Production model.
-- Evidently and custom summaries monitor live predictions.
+- Evidently and custom summaries monitor local prediction logs.
 
-## 4. Data Validation and Preprocessing
-- Required-column checks.
-- Binary target validation.
-- Transaction type normalization.
-- Numeric coercion and stratified train/test split.
+## 5. Results
 
-## 5. Modeling
-- Logistic Regression baseline.
-- Random Forest.
-- XGBoost.
-- Optuna-tuned XGBoost final candidate.
+| Model | Precision | Recall | F1 | ROC-AUC | PR-AUC | FP | FN |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Logistic Regression | 0.0259 | 0.9615 | 0.0504 | 0.9937 | 0.6253 | 1,883 | 2 |
+| Random Forest | 0.6852 | 0.7115 | 0.6981 | 0.9957 | 0.7773 | 17 | 15 |
+| XGBoost | 0.9429 | 0.6346 | 0.7586 | 0.9982 | 0.8761 | 2 | 19 |
+| Tuned XGBoost | 0.9429 | 0.6346 | 0.7586 | 0.9989 | 0.8715 | 2 | 19 |
 
-## 6. Evaluation Strategy
-- Accuracy is de-emphasized due to imbalance.
-- Primary metrics: recall, PR-AUC, and F1-score.
-- Operational metrics: false positives and false negatives.
+- Final selected model: XGBoost.
+- Selection criterion: held-out test PR-AUC first, then recall, then F1.
+- Optuna tuning optimized validation PR-AUC and did not use the final test set for trial selection.
+- Production model: `FraudDetectionModel` version 11, READY.
 
-## 7. MLflow Tracking and Registry
-- Parameters, metrics, confusion matrix, classification report, feature list, signature, and model artifacts.
-- Registered model name: `FraudDetectionModel`.
-- Lifecycle stages: Staging and Production.
+## 6. Verification Evidence
 
-## 8. Deployment
-- FastAPI endpoints: `/health`, `/model-info`, `/predict`, `/predict_batch`.
-- Production model loaded from MLflow registry.
-- Prediction logs persisted to CSV.
+- Final Airflow run: `qa_validation_tuning_20260509_142908`.
+- Airflow status: success.
+- FastAPI verified at `http://localhost:8000/docs`.
+- Evidently report exists and is real, not fallback HTML.
+- Tests pass: `5 passed`.
 
-## 9. Monitoring
-- Custom summary metrics.
-- Evidently data drift and distribution report.
-- Reports saved in `monitoring/reports/`.
+## 7. Limitations and Future Work
 
-## 10. Reproducibility
-- Docker Compose services.
-- Required commands and setup instructions.
-- Known local development assumptions.
-
-## 11. Future Work
-- Add threshold optimization by cost function.
-- Add CI/CD pipeline.
-- Add authenticated API access.
-- Add production-grade object storage and alerts.
+- Used a 200,000-row stratified sample, not the full source dataset.
+- Monitoring mechanics were verified with local prediction logs; stable production drift conclusions are not claimed.
+- Future work: threshold optimization, larger training sample, label feedback loop, richer monitoring.

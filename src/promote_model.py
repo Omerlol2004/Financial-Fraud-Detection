@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 
@@ -14,7 +14,7 @@ def promote_latest_staging_to_production() -> dict[str, str]:
     staging_versions = client.get_latest_versions(MODEL_NAME, stages=["Staging"])
     if not staging_versions:
         raise ValueError(f"No Staging versions found for {MODEL_NAME}.")
-    version = staging_versions[-1].version
+    version = max(staging_versions, key=lambda model_version: int(model_version.version)).version
     client.transition_model_version_stage(MODEL_NAME, version, "Production", archive_existing_versions=True)
     return {"model_name": MODEL_NAME, "version": str(version), "stage": "Production"}
 

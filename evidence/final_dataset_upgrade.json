@@ -1,0 +1,18 @@
+{
+  "source_url": "https://huggingface.co/datasets/purulalwani/Synthetic-Financial-Datasets-For-Fraud-Detection",
+  "source_file": "/opt/airflow/data/raw/financial_txns.parquet",
+  "output_file": "/opt/airflow/data/raw/paysim.csv",
+  "full_row_count": 6362620,
+  "full_class_distribution": {
+    "0": 6354407,
+    "1": 8213
+  },
+  "sample_row_count": 200000,
+  "sample_class_distribution": {
+    "0": 199742,
+    "1": 258
+  },
+  "sample_fraud_percentage": 0.129,
+  "sampling_method": "class-stratified sample preserving the original PaySim fraud rate as closely as integer counts allow",
+  "random_state": 42
+}

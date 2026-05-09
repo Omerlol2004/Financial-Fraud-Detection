@@ -1,0 +1,63 @@
+﻿<html><head><meta charset='utf-8'><style>body{font-family:Consolas,monospace;padding:24px;background:#fafafa}pre{white-space:pre-wrap;background:#fff;border:1px solid #ddd;padding:16px}</style></head><body><h1>mlflow_training_runs.json</h1><pre>{
+  &quot;logistic_regression&quot;: {
+    &quot;run_id&quot;: &quot;8e4e6bf5e0a84e53ac59c33932f1e58d&quot;,
+    &quot;params&quot;: {
+      &quot;model_name&quot;: &quot;logistic_regression&quot;,
+      &quot;target&quot;: &quot;isFraud&quot;,
+      &quot;features&quot;: &quot;step,type,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest&quot;
+    },
+    &quot;metrics&quot;: {
+      &quot;precision&quot;: 0.6666666666666666,
+      &quot;recall&quot;: 1.0,
+      &quot;f1&quot;: 0.8,
+      &quot;roc_auc&quot;: 0.875,
+      &quot;pr_auc&quot;: 0.8333333333333333
+    },
+    &quot;artifact_checks&quot;: {
+      &quot;evaluation/confusion_matrix.png&quot;: true,
+      &quot;evaluation/classification_report.json&quot;: true,
+      &quot;model/MLmodel&quot;: true
+    }
+  },
+  &quot;random_forest&quot;: {
+    &quot;run_id&quot;: &quot;b6a8e9a0ffcf4dfa8a72048c62df159a&quot;,
+    &quot;params&quot;: {
+      &quot;model_name&quot;: &quot;random_forest&quot;,
+      &quot;target&quot;: &quot;isFraud&quot;,
+      &quot;features&quot;: &quot;step,type,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest&quot;
+    },
+    &quot;metrics&quot;: {
+      &quot;precision&quot;: 0.5,
+      &quot;recall&quot;: 0.5,
+      &quot;f1&quot;: 0.5,
+      &quot;roc_auc&quot;: 0.875,
+      &quot;pr_auc&quot;: 0.8333333333333333
+    },
+    &quot;artifact_checks&quot;: {
+      &quot;evaluation/confusion_matrix.png&quot;: true,
+      &quot;evaluation/classification_report.json&quot;: true,
+      &quot;model/MLmodel&quot;: true
+    }
+  },
+  &quot;xgboost&quot;: {
+    &quot;run_id&quot;: &quot;c8a136ac24f643f784ec0a08fa3f3169&quot;,
+    &quot;params&quot;: {
+      &quot;model_name&quot;: &quot;xgboost&quot;,
+      &quot;target&quot;: &quot;isFraud&quot;,
+      &quot;features&quot;: &quot;step,type,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest&quot;
+    },
+    &quot;metrics&quot;: {
+      &quot;precision&quot;: 1.0,
+      &quot;recall&quot;: 0.5,
+      &quot;f1&quot;: 0.6666666666666666,
+      &quot;roc_auc&quot;: 0.75,
+      &quot;pr_auc&quot;: 0.75
+    },
+    &quot;artifact_checks&quot;: {
+      &quot;evaluation/confusion_matrix.png&quot;: true,
+      &quot;evaluation/classification_report.json&quot;: true,
+      &quot;model/MLmodel&quot;: true
+    }
+  }
+}
+</pre></body></html>

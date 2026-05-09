@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -13,6 +13,8 @@ from src.config import (
     TEST_SIZE,
     TRAIN_PATH,
     RANDOM_STATE,
+    BEST_RUN_PATH,
+    METRICS_PATH,
     ensure_directories,
 )
 
@@ -45,6 +47,9 @@ def preprocess_data() -> dict[str, str]:
     train.to_csv(TRAIN_PATH, index=False)
     test.to_csv(TEST_PATH, index=False)
     train.to_csv(REFERENCE_PATH, index=False)
+    for generated_file in [METRICS_PATH, BEST_RUN_PATH]:
+        if generated_file.exists():
+            generated_file.unlink()
     return {"train_path": str(TRAIN_PATH), "test_path": str(TEST_PATH), "reference_path": str(REFERENCE_PATH)}
 
 

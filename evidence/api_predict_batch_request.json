@@ -1,0 +1,20 @@
+[
+    {
+        "step":  14,
+        "newbalanceOrig":  0,
+        "amount":  100000,
+        "type":  "TRANSFER",
+        "newbalanceDest":  0,
+        "oldbalanceOrg":  100000,
+        "oldbalanceDest":  0
+    },
+    {
+        "step":  14,
+        "newbalanceOrig":  1880,
+        "amount":  120,
+        "type":  "PAYMENT",
+        "newbalanceDest":  0,
+        "oldbalanceOrg":  2000,
+        "oldbalanceDest":  0
+    }
+]

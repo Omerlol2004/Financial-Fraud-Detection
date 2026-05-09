@@ -1,10 +1,10 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import sys
 from pathlib import Path
 
 import pandas as pd
-from evidently.metric_preset import DataDriftPreset, TargetDriftPreset
+from evidently.metric_preset import DataDriftPreset
 from evidently.report import Report
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
@@ -26,7 +26,7 @@ def generate_evidently_report() -> str:
     common_columns = [column for column in FEATURE_COLUMNS if column in reference.columns and column in current.columns]
 
     try:
-        report = Report(metrics=[DataDriftPreset(), TargetDriftPreset()])
+        report = Report(metrics=[DataDriftPreset()])
         report.run(reference_data=reference[common_columns], current_data=current[common_columns])
         report.save_html(str(output_path))
     except Exception as exc:  # Evidently APIs differ across versions; keep pipeline resilient.

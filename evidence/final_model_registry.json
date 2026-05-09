@@ -1,0 +1,61 @@
+{
+  "model_name": "FraudDetectionModel",
+  "latest_versions": [
+    {
+      "version": "5",
+      "stage": "Archived",
+      "status": "READY",
+      "run_id": "13ab71e92f5241c194db5d3120569580"
+    },
+    {
+      "version": "2",
+      "stage": "Staging",
+      "status": "READY",
+      "run_id": "fb15854d6c204b678fd0625d33bf26c9"
+    },
+    {
+      "version": "6",
+      "stage": "Production",
+      "status": "READY",
+      "run_id": "c82c4e5efefe4315bb40919216d4f198"
+    }
+  ],
+  "all_versions": [
+    {
+      "version": "1",
+      "stage": "Archived",
+      "status": "READY",
+      "run_id": "21388dd5e7684b7b8442d457b53c79f6"
+    },
+    {
+      "version": "2",
+      "stage": "Staging",
+      "status": "READY",
+      "run_id": "fb15854d6c204b678fd0625d33bf26c9"
+    },
+    {
+      "version": "3",
+      "stage": "Archived",
+      "status": "READY",
+      "run_id": "0ed8e65b6f9f4ec18430f6cd9dbc04ed"
+    },
+    {
+      "version": "4",
+      "stage": "Archived",
+      "status": "READY",
+      "run_id": "6b5de31bc8284764bf2d6aa886b335b3"
+    },
+    {
+      "version": "5",
+      "stage": "Archived",
+      "status": "READY",
+      "run_id": "13ab71e92f5241c194db5d3120569580"
+    },
+    {
+      "version": "6",
+      "stage": "Production",
+      "status": "READY",
+      "run_id": "c82c4e5efefe4315bb40919216d4f198"
+    }
+  ]
+}

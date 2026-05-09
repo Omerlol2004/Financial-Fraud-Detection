@@ -1,0 +1,20 @@
+[
+  {
+    "step": 249,
+    "type": "CASH_OUT",
+    "amount": 3138.25,
+    "oldbalanceOrg": 3138.25,
+    "newbalanceOrig": 0.0,
+    "oldbalanceDest": 249297.18,
+    "newbalanceDest": 252435.43
+  },
+  {
+    "step": 129,
+    "type": "CASH_IN",
+    "amount": 189870.45,
+    "oldbalanceOrg": 22394345.41,
+    "newbalanceOrig": 22584215.86,
+    "oldbalanceDest": 430964.57,
+    "newbalanceDest": 241094.11
+  }
+]

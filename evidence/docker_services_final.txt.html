@@ -1,0 +1,9 @@
+﻿<html><head><meta charset='utf-8'><style>body{font-family:Consolas,monospace;padding:24px;background:#fafafa}pre{white-space:pre-wrap;background:#fff;border:1px solid #ddd;padding:16px}</style></head><body><h1>docker_services_final.txt</h1><pre>NAME                        IMAGE                     COMMAND                  SERVICE             CREATED          STATUS                    PORTS
+oozyb-airflow-scheduler-1   oozyb-airflow-scheduler   &quot;/usr/bin/dumb-init …&quot;   airflow-scheduler   21 minutes ago   Up 20 minutes             8080/tcp
+oozyb-airflow-webserver-1   oozyb-airflow-webserver   &quot;/usr/bin/dumb-init …&quot;   airflow-webserver   21 minutes ago   Up 20 minutes             0.0.0.0:8080-&gt;8080/tcp, [::]:8080-&gt;8080/tcp
+oozyb-fastapi-1             oozyb-fastapi             &quot;uvicorn app.main:ap…&quot;   fastapi             21 minutes ago   Up 38 seconds             0.0.0.0:8000-&gt;8000/tcp, [::]:8000-&gt;8000/tcp
+oozyb-minio-1               minio/minio:latest        &quot;/usr/bin/docker-ent…&quot;   minio               22 hours ago     Up 21 minutes             0.0.0.0:9000-9001-&gt;9000-9001/tcp, [::]:9000-9001-&gt;9000-9001/tcp
+oozyb-mlflow-1              python:3.11-slim          &quot;sh -c &#39;pip install …&quot;   mlflow              23 hours ago     Up 20 minutes             0.0.0.0:5000-&gt;5000/tcp, [::]:5000-&gt;5000/tcp
+oozyb-mlflow-postgres-1     postgres:16               &quot;docker-entrypoint.s…&quot;   mlflow-postgres     23 hours ago     Up 21 minutes (healthy)   5432/tcp
+oozyb-postgres-1            postgres:16               &quot;docker-entrypoint.s…&quot;   postgres            22 hours ago     Up 21 minutes (healthy)   0.0.0.0:5432-&gt;5432/tcp, [::]:5432-&gt;5432/tcp
+</pre></body></html>

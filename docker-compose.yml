@@ -1,4 +1,4 @@
-services:
+﻿services:
   postgres:
     image: postgres:16
     environment:
@@ -9,6 +9,11 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow -d airflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
   minio:
     image: minio/minio:latest
@@ -22,6 +27,20 @@ services:
     volumes:
       - minio_data:/data
 
+  mlflow-postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: mlflow
+      POSTGRES_DB: mlflow
+    volumes:
+      - mlflow_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mlflow -d mlflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
   mlflow:
     image: python:3.11-slim
     working_dir: /app
@@ -31,20 +50,12 @@ services:
       --backend-store-uri postgresql://mlflow:mlflow@mlflow-postgres:5432/mlflow
       --artifacts-destination /mlflow/artifacts"
     depends_on:
-      - mlflow-postgres
+      mlflow-postgres:
+        condition: service_healthy
     ports:
       - "5000:5000"
     volumes:
       - mlflow_artifacts:/mlflow/artifacts
-
-  mlflow-postgres:
-    image: postgres:16
-    environment:
-      POSTGRES_USER: mlflow
-      POSTGRES_PASSWORD: mlflow
-      POSTGRES_DB: mlflow
-    volumes:
-      - mlflow_postgres_data:/var/lib/postgresql/data
 
   airflow-init:
     build:
@@ -54,17 +65,22 @@ services:
       bash -c "airflow db migrate &&
       airflow users create --username admin --password admin --firstname Local --lastname Admin --role Admin --email admin@example.com || true"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
       AIRFLOW__WEBSERVER__SECRET_KEY: local-dev-secret
+      PYTHONPATH: /opt/airflow
     volumes:
       - ./dags:/opt/airflow/dags
+      - ./app:/opt/airflow/app
       - ./src:/opt/airflow/src
       - ./monitoring:/opt/airflow/monitoring
       - ./data:/opt/airflow/data
+      - ./tests:/opt/airflow/tests
+      - ./evidence:/opt/airflow/evidence
 
   airflow-webserver:
     build:
@@ -81,13 +97,17 @@ services:
       AIRFLOW__WEBSERVER__SECRET_KEY: local-dev-secret
       MLFLOW_TRACKING_URI: http://mlflow:5000
       RAW_DATA_PATH: /opt/airflow/data/raw/paysim.csv
+      PYTHONPATH: /opt/airflow
     ports:
       - "8080:8080"
     volumes:
       - ./dags:/opt/airflow/dags
+      - ./app:/opt/airflow/app
       - ./src:/opt/airflow/src
       - ./monitoring:/opt/airflow/monitoring
       - ./data:/opt/airflow/data
+      - ./tests:/opt/airflow/tests
+      - ./evidence:/opt/airflow/evidence
 
   airflow-scheduler:
     build:
@@ -103,26 +123,37 @@ services:
       AIRFLOW__WEBSERVER__SECRET_KEY: local-dev-secret
       MLFLOW_TRACKING_URI: http://mlflow:5000
       RAW_DATA_PATH: /opt/airflow/data/raw/paysim.csv
+      PYTHONPATH: /opt/airflow
     volumes:
       - ./dags:/opt/airflow/dags
+      - ./app:/opt/airflow/app
       - ./src:/opt/airflow/src
       - ./monitoring:/opt/airflow/monitoring
       - ./data:/opt/airflow/data
+      - ./tests:/opt/airflow/tests
+      - ./evidence:/opt/airflow/evidence
 
   fastapi:
     build:
       context: .
       dockerfile: docker/Dockerfile.api
+    user: "50000:0"
     depends_on:
       - mlflow
     environment:
+      HOME: /tmp
       MLFLOW_TRACKING_URI: http://mlflow:5000
       MODEL_NAME: FraudDetectionModel
       MODEL_STAGE: Production
     ports:
       - "8000:8000"
     volumes:
+      - ./app:/app/app
+      - ./src:/app/src
+      - ./monitoring:/app/monitoring
       - ./data:/app/data
+      - ./tests:/app/tests
+      - ./evidence:/app/evidence
 
 volumes:
   postgres_data:

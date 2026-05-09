@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import sys
 from datetime import datetime
@@ -14,6 +14,7 @@ from monitoring.generate_report import generate_evidently_report
 from src.data_validation import validate_data
 from src.evaluate import evaluate_best_model
 from src.preprocessing import preprocess_data
+from src.promote_model import promote_latest_staging_to_production
 from src.register_model import register_best_model
 from src.train import train_baseline_model, train_random_forest, train_xgboost
 from src.tune import tune_best_model
@@ -34,9 +35,10 @@ with DAG(
     tune_best_model_task = PythonOperator(task_id="tune_best_model", python_callable=tune_best_model, op_kwargs={"n_trials": 20})
     evaluate_best_model_task = PythonOperator(task_id="evaluate_best_model", python_callable=evaluate_best_model)
     register_best_model_task = PythonOperator(task_id="register_best_model", python_callable=register_best_model)
+    promote_model_task = PythonOperator(task_id="promote_model", python_callable=promote_latest_staging_to_production)
     generate_monitoring_report_task = PythonOperator(task_id="generate_monitoring_report", python_callable=generate_evidently_report)
 
     validate_data_task >> preprocess_data_task
-    preprocess_data_task >> [train_baseline_task, train_random_forest_task, train_xgboost_task]
-    [train_baseline_task, train_random_forest_task, train_xgboost_task] >> tune_best_model_task
-    tune_best_model_task >> evaluate_best_model_task >> register_best_model_task >> generate_monitoring_report_task
+    preprocess_data_task >> train_baseline_task >> train_random_forest_task >> train_xgboost_task
+    train_xgboost_task >> tune_best_model_task
+    tune_best_model_task >> evaluate_best_model_task >> register_best_model_task >> promote_model_task >> generate_monitoring_report_task

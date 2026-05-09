@@ -1,0 +1,13 @@
+{
+  "actual_isFraud": 1,
+  "fraud_probability": 0.9993840456008911,
+  "request": {
+    "step": 625,
+    "type": "TRANSFER",
+    "amount": 2654302.46,
+    "oldbalanceOrg": 2654302.46,
+    "newbalanceOrig": 0.0,
+    "oldbalanceDest": 0.0,
+    "newbalanceDest": 0.0
+  }
+}

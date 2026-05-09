@@ -1,0 +1,109 @@
+[
+  {
+    "model_name": "logistic_regression",
+    "run_id": "9fa26741ec7e49c1ac942124ccf5275e",
+    "metrics": {
+      "f1": 0.05037783375314862,
+      "false_negatives": 2.0,
+      "false_positives": 1883.0,
+      "pr_auc": 0.6253485626979701,
+      "precision": 0.02586652871184687,
+      "recall": 0.9615384615384616,
+      "roc_auc": 0.9937428272138396
+    },
+    "params": {
+      "features": "step,type,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest",
+      "model_name": "logistic_regression",
+      "target": "isFraud"
+    },
+    "artifacts": [
+      "evaluation",
+      "metadata",
+      "model"
+    ]
+  },
+  {
+    "model_name": "random_forest",
+    "run_id": "777031c965e040218a8635289640c38c",
+    "metrics": {
+      "f1": 0.6981132075471698,
+      "false_negatives": 15.0,
+      "false_positives": 17.0,
+      "pr_auc": 0.7773277795867817,
+      "precision": 0.6851851851851852,
+      "recall": 0.7115384615384616,
+      "roc_auc": 0.9956607050704377
+    },
+    "params": {
+      "features": "step,type,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest",
+      "model_name": "random_forest",
+      "target": "isFraud"
+    },
+    "artifacts": [
+      "evaluation",
+      "metadata",
+      "model"
+    ]
+  },
+  {
+    "model_name": "xgboost",
+    "run_id": "df14e074faba410294acc469a9fc6efb",
+    "metrics": {
+      "f1": 0.7586206896551724,
+      "false_negatives": 19.0,
+      "false_positives": 2.0,
+      "pr_auc": 0.8760972380822563,
+      "precision": 0.9428571428571428,
+      "recall": 0.6346153846153846,
+      "roc_auc": 0.998219319731035
+    },
+    "params": {
+      "features": "step,type,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest",
+      "model_name": "xgboost",
+      "target": "isFraud"
+    },
+    "artifacts": [
+      "evaluation",
+      "metadata",
+      "model"
+    ]
+  },
+  {
+    "model_name": "tuned_xgboost",
+    "run_id": "2998d9aa3bf84a588c31012c486b2d01",
+    "metrics": {
+      "best_validation_f1": 0.8450704225352113,
+      "best_validation_false_negatives": 11.0,
+      "best_validation_false_positives": 0.0,
+      "best_validation_pr_auc": 0.9079515827729367,
+      "best_validation_precision": 1.0,
+      "best_validation_recall": 0.7317073170731707,
+      "best_validation_roc_auc": 0.999457384041596,
+      "f1": 0.7586206896551724,
+      "false_negatives": 19.0,
+      "false_positives": 2.0,
+      "pr_auc": 0.8715061449402898,
+      "precision": 0.9428571428571428,
+      "recall": 0.6346153846153846,
+      "roc_auc": 0.9988663146706103
+    },
+    "params": {
+      "colsample_bytree": "0.9035337974131699",
+      "final_evaluation_split": "held_out_test",
+      "learning_rate": "0.110502922227166",
+      "max_depth": "7",
+      "min_child_weight": "2",
+      "model_name": "tuned_xgboost",
+      "n_estimators": "186",
+      "subsample": "0.7309280407282516",
+      "target": "isFraud",
+      "tuning_objective": "validation_pr_auc",
+      "tuning_validation_size": "0.2"
+    },
+    "artifacts": [
+      "evaluation",
+      "metadata",
+      "model"
+    ]
+  }
+]
